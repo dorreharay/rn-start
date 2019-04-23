@@ -1,0 +1,40 @@
+{
+  "name": "reactNativ",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "installDebug": "cd android && ./gradlew installDebug",
+    "assembleDebug": "cd android && ./gradlew assembleDebug -debug --stacktrace",
+    "assembleR": "cd android && ./gradlew assembleRelease",
+    "buildR": "npm run bundleImport && npm run assembleR",
+    "clean": "cd android && ./gradlew clean",
+    "forceReload": "rm -rf node_modules && npm install && rm -fr $TMPDIR/react- && watchman watch-del-all",
+    "adbInR": "adb install android/app/build/outputs/apk/app-release.apk",
+    "adbInstall": "adb install android/app/build/outputs/apk/app-debug.apk",
+    "bundleImport": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "production": "npm run bundleImport && npm run assembleDebug",
+    "release": "cd android && ./gradlew assembleRelease"
+  },
+  "dependencies": {
+    "react": "16.8.3",
+    "react-native": "0.59.5",
+    "react-native-camera": "^2.6.0",
+    "react-native-camera-kit": "^7.3.7",
+    "react-native-gesture-handler": "^1.1.0",
+    "react-native-maps": "^0.24.2",
+    "react-navigation": "^3.8.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.3",
+    "@babel/runtime": "7.4.3",
+    "babel-jest": "24.7.1",
+    "jest": "24.7.1",
+    "metro-react-native-babel-preset": "0.53.1",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
